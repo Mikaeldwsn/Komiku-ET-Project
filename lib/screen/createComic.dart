@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'upload_comic_pages_page.dart';
+import '../ComicManagement/upload_comic_pages_page.dart';
 
 const String baseUrl = "https://ubaya.cloud/flutter/[NRP]";
 

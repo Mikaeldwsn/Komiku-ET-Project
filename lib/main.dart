@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'UserManagement/login.dart';
+import 'screen/login.dart';
+import '/utils/session_helper.dart';
 
 //variabel global username
 String activeUserId = "";
@@ -42,8 +43,6 @@ class MaterialAppWrapper extends StatelessWidget {
 }
 
 void doLogout() async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.remove("user_id");
-  prefs.remove("username");
+  await SessionHelper.logout();
   main(); // panggil ulang main() supaya kembali ke LoginPage
 }
