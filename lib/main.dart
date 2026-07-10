@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screen/login.dart';
 import '/utils/session_helper.dart';
+import 'screen/home_page.dart';
 
 //variabel global username
 String activeUserId = "";
@@ -11,6 +12,7 @@ String activeUsername = "";
 Future<String> checkUser() async {
   final prefs = await SharedPreferences.getInstance();
   String userId = prefs.getString("user_id") ?? '';
+  activeUsername = prefs.getString("username") ?? '';
   return userId;
 }
 
@@ -23,7 +25,7 @@ void main() {
     } else {
       // IF sdh pernah login THEN langsung masuk
       activeUserId = result;
-      runApp(const MaterialAppWrapper(home: CategoryPagePlaceholder()));
+      runApp(const MaterialAppWrapper(home: HomePage()));
     }
   });
 }

@@ -1,8 +1,4 @@
 <?php
-// login.php
-// Web service untuk Halaman Login - Aplikasi Komiku
-// Pola mengikuti Week 9 (Login Handling): prepared statement + bind_param
-
 header("Access-Control-Allow-Origin: *");
 $arr = null;
 

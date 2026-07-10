@@ -4,14 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:komiku/screen/ComicManagement/upload_page.dart';
 
-import '../ComicManagement/upload_comic_pages_page.dart';
+const String baseUrl = "https://ubaya.cloud/flutter/160423007/komiku";
 
-const String baseUrl = "https://ubaya.cloud/flutter/[NRP]";
-
-// -----------------------------------------------------------
-// Model kategori (pola sama dengan class Genre di Week 11)
-// -----------------------------------------------------------
 class ComicCategory {
   int id;
   String name;
@@ -35,14 +31,9 @@ class CreateComicPage extends StatefulWidget {
 class _CreateComicPageState extends State<CreateComicPage> {
   final _formKey = GlobalKey<FormState>();
 
-  // ----- Judul (Week 10 pattern) -----
   String _title = "";
-
-  // ----- Kategori (Week 11 pattern: fetch list, tapi versi multi-select) -----
   List<ComicCategory> _categories = [];
   final Set<int> _selectedCategoryIds = {};
-
-  // ----- Poster (Week 12 pattern) -----
   Uint8List? _posterBytes;
 
   bool _isSubmitting = false;
@@ -70,9 +61,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
     }
   }
 
-  // ---------------------------------------------------------
-  // Image Picker - bottom sheet (persis pola Week 12)
-  // ---------------------------------------------------------
   void _showPicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -135,12 +123,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
       });
     }
   }
-
-  // ---------------------------------------------------------
-  // Submit - urutan: buat komik -> simpan kategori -> upload poster
-  // -> buat chapter default -> lanjut ke halaman upload pages
-  // (pola "simpan utama, lanjut isi data anak" seperti Week 11)
-  // ---------------------------------------------------------
   Future<void> submit() async {
     setState(() {
       _isSubmitting = true;
@@ -211,7 +193,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => UploadComicPagesPage(chapterId: chapterId),
+        builder: (context) => UploadPage(chapterId: chapterId),
       ),
     );
   }

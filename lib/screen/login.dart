@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import '/services/api_services.dart';
 import '/utils/session_helper.dart';
+import 'package:komiku/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -48,17 +49,18 @@ class _LoginPageState extends State<LoginPage> {
           response["user_id"].toString(),
           response["username"],
         );
+        main();
 
-        if (mounted) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => Scaffold(
-                appBar: AppBar(title: const Text('Komiku')),
-                body: Center(child: Text("Welcome, ${response['username']}!")),
-              ),
-            ),
-          );
-        }
+        // if (mounted) {
+        //   Navigator.of(context).pushReplacement(
+        //     MaterialPageRoute(
+        //       builder: (context) => Scaffold(
+        //         appBar: AppBar(title: const Text('Komiku')),
+        //         body: Center(child: Text("Welcome, ${response['username']}!")),
+        //       ),
+        //     ),
+        //   );
+        // }
       } else {
         setState(() {
           _isLoading = false;
