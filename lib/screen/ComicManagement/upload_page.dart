@@ -120,7 +120,6 @@ class _UploadPageState extends State<UploadPage> {
       _showMessage('Upload minimal 1 halaman sebelum selesai');
       return;
     }
-    // Kembali ke halaman utama (MainPage), keluar dari alur Buat Komik
     Navigator.of(context).popUntil((route) => route.isFirst);
     _showMessage('Komik berhasil dibuat!');
   }

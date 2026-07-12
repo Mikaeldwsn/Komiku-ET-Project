@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:komiku/main.dart'; 
+import 'package:komiku/main.dart';
+import 'package:komiku/screen/comicPage.dart'; 
 import 'createComic.dart'; 
+import 'categoryPage.dart';
 
 // home page berisi navigasi ke halaman-halaman utama aplikasi Komiku.
 class HomePage extends StatefulWidget {
@@ -16,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   // Daftar halaman sesuai urutan tab di bawah.
   // Ganti placeholder ini dengan halaman asli begitu tersedia.
   final List<Widget> _pages = const [
-    _CategoryTabPlaceholder(),
-    _SearchTabPlaceholder(),
+    CategoryPage(),
+    ComicPage(),
     CreateComicPage(),
     _ProfileTab(),
   ];
@@ -59,35 +61,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// Placeholder sementara untuk tab Kategori
-// TO DO Ganti dengan halaman asli
-class _CategoryTabPlaceholder extends StatelessWidget {
-  const _CategoryTabPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Kategori')),
-      body: const Center(child: Text('Halaman Kategori (belum dibuat)')),
-    );
-  }
-}
-
-// Placeholder sementara untuk cari komik
-// TO DO Ganti dengan yg asli
-class _SearchTabPlaceholder extends StatelessWidget {
-  const _SearchTabPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Cari Komik')),
-      body: const Center(child: Text('Halaman Cari Komik (belum dibuat)')),
-    );
-  }
-}
-
 // -----------------------------------------------------------
 // Tab Profil - berisi info user aktif & tombol logout
 // -----------------------------------------------------------
