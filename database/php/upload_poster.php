@@ -44,7 +44,7 @@ function savePosterImage($base64Image, $comicId) {
 $saveResult = savePosterImage($image, $comic_id);
 
 if ($saveResult["result"] == "success") {
-    $conn = new mysqli("localhost", "flutter_[NRP]", "ubaya", "flutter_[NRP]");
+    $conn = new mysqli("localhost", "flutter_160423007", "ubaya", "flutter_160423007");
     if (!$conn->connect_error) {
         $filePath = $saveResult["file_path"];
         $sql = "UPDATE comics SET poster_url = ? WHERE id = ?";

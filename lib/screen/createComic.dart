@@ -44,9 +44,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
     _loadCategories();
   }
 
-  // ---------------------------------------------------------
-  // Ambil daftar kategori dari server (dipanggil sekali di awal)
-  // ---------------------------------------------------------
+  // get daftar kategori dari server
   Future<void> _loadCategories() async {
     final response = await http.post(Uri.parse("$baseUrl/get_categories.php"));
     if (response.statusCode == 200) {
@@ -149,7 +147,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
     }
     final int comicId = createJson['comic_id'];
 
-    // 2. Simpan kategori yang dipilih (loop, satu request per kategori)
+    // Simpan kategori yang dipilih
     for (int categoryId in _selectedCategoryIds) {
       await http.post(
         Uri.parse("$baseUrl/add_comic_category.php"),
@@ -157,7 +155,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
       );
     }
 
-    // 3. Upload poster jika ada
+    // Upload poster
     if (_posterBytes != null) {
       String base64Image = base64Encode(_posterBytes!);
       await http.post(
@@ -166,7 +164,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
       );
     }
 
-    // 4. Buat Chapter 1 secara otomatis (tempat halaman-halaman akan ditempel)
+    // Chapter 1 dibuat secara otomatis
     final chapterResponse = await http.post(
       Uri.parse("$baseUrl/create_chapter.php"),
       body: {
@@ -189,7 +187,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
 
     if (!mounted) return;
 
-    // 5. Lanjut ke halaman upload halaman-halaman komik
+    // upload halaman-halaman komik
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -215,7 +213,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
         child: ListView(
           padding: const EdgeInsets.all(10),
           children: [
-            // ----- Judul -----
+            //Judul
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
@@ -235,7 +233,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
               ),
             ),
 
-            // ----- Kategori (multi-select checkbox) -----
+            // Kategori checkbox
             const Padding(
               padding: EdgeInsets.all(10),
               child: Text('Kategori', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -263,7 +261,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
                     }).toList(),
                   ),
 
-            // ----- Poster -----
+            // Poster
             const Padding(
               padding: EdgeInsets.all(10),
               child: Text('Poster Komik', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -281,7 +279,7 @@ class _CreateComicPageState extends State<CreateComicPage> {
               ),
             ),
 
-            // ----- Submit -----
+            // Btn Submit 
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: ElevatedButton(

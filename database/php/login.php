@@ -2,15 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 $arr = null;
 
-// Ganti dengan kredensial database Anda di ubaya.cloud
 $conn = new mysqli("localhost", "flutter_160423007", "ubaya", "flutter_160423007");
 
 if ($conn->connect_error) {
     $arr = ["result" => "error", "message" => "unable to connect"];
-} else {
-    // Ambil parameter yang dikirim dari Flutter (body POST)
-    extract($_POST);
-    // $username dan $password otomatis terbentuk dari extract()
+} else {    
+    extract($_POST);    
 
     $sql = "SELECT * FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($sql);

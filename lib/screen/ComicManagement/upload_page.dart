@@ -15,15 +15,12 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  // Daftar halaman yang sudah berhasil di-upload (untuk ditampilkan sebagai preview)
+  //halaman yang sudah berhasil diupload ditampilkan sbg preview
   final List<Uint8List> _uploadedPages = [];
 
   int _pageCounter = 0; // dipakai sebagai page_number, mulai dari 1
   bool _isUploading = false;
 
-  // ---------------------------------------------------------
-  // Image Picker - bottom sheet (persis pola Week 12)
-  // ---------------------------------------------------------
   void _showPicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -57,10 +54,7 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  // ---------------------------------------------------------
-  // Ambil gambar lalu langsung upload ke server (pola Week 12:
   // setiap gambar dipilih langsung dikirim, bukan ditumpuk dulu)
-  // ---------------------------------------------------------
   Future<void> _pickAndUpload(ImageSource source) async {
     final picker = ImagePicker();
     final image = await picker.pickImage(

@@ -1,8 +1,6 @@
 <?php
-// upload_page.php
-// Terima gambar halaman komik dalam base64, simpan ke images/pages/[chapter_id]/
-// lalu insert row baru ke tabel pages.
-// mirip uploadscene64.php di Week 12.
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -44,7 +42,7 @@ function savePageImage($base64Image, $chapterId) {
 $saveResult = savePageImage($image, $chapter_id);
 
 if ($saveResult["result"] == "success") {
-    $conn = new mysqli("localhost", "flutter_[NRP]", "ubaya", "flutter_[NRP]");
+    $conn = new mysqli("localhost", "flutter_160423007", "ubaya", "flutter_160423007");
     if (!$conn->connect_error) {
         $filePath = $saveResult["file_path"];
         $sql = "INSERT INTO pages(chapter_id, page_number, image_url) VALUES(?, ?, ?)";

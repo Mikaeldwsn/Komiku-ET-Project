@@ -61,9 +61,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-// -----------------------------------------------------------
 // Tab Profil - berisi info user aktif & tombol logout
-// -----------------------------------------------------------
 class _ProfileTab extends StatelessWidget {
   const _ProfileTab();
 
