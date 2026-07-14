@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:komiku/class/Comic.dart';
 import 'package:komiku/class/ComicDetail.dart';
+import 'package:komiku/screen/readComic.dart';
 import 'package:komiku/services/api_services.dart';
 
 class ComicDetailPage extends StatefulWidget {
@@ -22,7 +23,6 @@ class _ComicDetailPageState extends State<ComicDetailPage> {
     comic = widget.comic;
     loadDetail();
   }
-  @override
   @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -100,6 +100,37 @@ Widget build(BuildContext context) {
 
                       Text(
                         "${comic.viewCount} views",
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      /// Read Comic Button
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ReadComicPage(
+                                  comicId: comic.id,
+                                  comicTitle: comic.title,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.menu_book),
+                          label: const Text(
+                            'Baca Komik',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

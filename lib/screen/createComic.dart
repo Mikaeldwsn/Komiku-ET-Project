@@ -207,7 +207,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Buat Komik')),
       body: Form(
         key: _formKey,
         child: ListView(

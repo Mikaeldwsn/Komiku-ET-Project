@@ -15,13 +15,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  // Daftar halaman sesuai urutan tab di bawah.
-  // Ganti placeholder ini dengan halaman asli begitu tersedia.
   final List<Widget> _pages = const [
     CategoryPage(),
     ComicPage(),
     CreateComicPage(),
-    _ProfileTab(),
+  ];
+
+  final List<String> _titles = const [
+    "Kategori",
+    "Cari Komik",
+    "Buat Komik",
   ];
 
   void _onTabTapped(int index) {
@@ -33,6 +36,75 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_titles[_selectedIndex]),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.orange[900],
+              ),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.person,
+                  size: 40,
+                  color: Colors.grey,
+                ),
+              ),
+              accountName: Text(
+                activeUsername.isNotEmpty ? activeUsername : 'User',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.category),
+              title: const Text('Kategori'),
+              selected: _selectedIndex == 0,
+              selectedColor: Colors.orange[900],
+              onTap: () {
+                _onTabTapped(0);
+                Navigator.pop(context); // Close drawer
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.search),
+              title: const Text('Cari'),
+              selected: _selectedIndex == 1,
+              selectedColor: Colors.orange[900],
+              onTap: () {
+                _onTabTapped(1);
+                Navigator.pop(context); // Close drawer
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add_box),
+              title: const Text('Buat Komik'),
+              selected: _selectedIndex == 2,
+              selectedColor: Colors.orange[900],
+              onTap: () {
+                _onTabTapped(2);
+                Navigator.pop(context); // Close drawer
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.logout, color: Colors.red),
+              title: const Text('Logout', style: TextStyle(color: Colors.red)),
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+                doLogout();
+              },
+            ),
+          ],
+        ),
+      ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -52,47 +124,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.add_box),
             label: 'Buat Komik',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
         ],
-      ),
-    );
-  }
-}
-// Tab Profil - berisi info user aktif & tombol logout
-class _ProfileTab extends StatelessWidget {
-  const _ProfileTab();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Profil')),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.account_circle, size: 80, color: Colors.grey),
-            const SizedBox(height: 10),
-            Text(
-              activeUsername.isNotEmpty ? activeUsername : 'User',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton.icon(
-              onPressed: () {
-                doLogout();
-              },
-              icon: const Icon(Icons.logout),
-              label: const Text('Logout'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange[900],
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

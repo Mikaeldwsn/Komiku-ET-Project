@@ -32,6 +32,8 @@ class _ComicPageState extends State<ComicPage> {
     setState(() {
       isLoading = false;
     });
+
+    _fetchMissingCategories();
   }
 
   Future<void> searchComic(String keyword) async{
@@ -40,18 +42,34 @@ class _ComicPageState extends State<ComicPage> {
     setState(() {
       isLoading = false;
     });
+
+    _fetchMissingCategories();
+  }
+
+  void _fetchMissingCategories() {
+    for (var comic in comics) {
+      if (comic.categories.isEmpty) {
+        ApiService.getComicDetail(comic.id).then((detail) {
+          if (mounted) {
+            setState(() {
+              comic.categories = detail.categories;
+            });
+          }
+        }).catchError((e) {
+          // ignore or handle error silently
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.categoryId == null
-              ? "Comics"
-              : "Category Comics",
-        ),
-      ),
+      appBar: widget.categoryId == null
+          ? null
+          : AppBar(
+              title: const Text("Category Comics"),
+            ),
     body: Column(
       children: [
         Padding(
@@ -174,6 +192,34 @@ class _ComicPageState extends State<ComicPage> {
                                     Text("${comic.viewCount} views"),
                                   ],
                                 ),
+
+                                if (comic.categories.isNotEmpty) ...[
+                                  const SizedBox(height: 8),
+                                  Wrap(
+                                    spacing: 4,
+                                    runSpacing: 4,
+                                    children: comic.categories
+                                        .map((cat) => Container(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 6, vertical: 2),
+                                              decoration: BoxDecoration(
+                                                color: Colors.orange.shade50,
+                                                borderRadius: BorderRadius.circular(4),
+                                                border: Border.all(
+                                                    color: Colors.orange.shade200),
+                                              ),
+                                              child: Text(
+                                                cat,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.orange.shade900,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ))
+                                        .toList(),
+                                  ),
+                                ],
                               ],
                             ),
                           ),

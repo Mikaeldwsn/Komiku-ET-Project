@@ -277,6 +277,7 @@ class _ReadComicPageState extends State<ReadComicPage> {
                             child: Text('Belum ada komentar'),
                           )
                         : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: _comments.map((comment) {
                               final bool isReply = comment.parentCommentId != null;
                               return Padding(
