@@ -4,7 +4,6 @@ import 'package:komiku/screen/comicPage.dart';
 import 'createComic.dart'; 
 import 'categoryPage.dart';
 
-// home page berisi navigasi ke halaman-halaman utama aplikasi Komiku.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -62,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 18,
                 ),
               ),
+              accountEmail: const Text(''),
             ),
             ListTile(
               leading: const Icon(Icons.category),
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               selectedColor: Colors.orange[900],
               onTap: () {
                 _onTabTapped(0);
-                Navigator.pop(context); // Close drawer
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
               selectedColor: Colors.orange[900],
               onTap: () {
                 _onTabTapped(1);
-                Navigator.pop(context); // Close drawer
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
               selectedColor: Colors.orange[900],
               onTap: () {
                 _onTabTapped(2);
-                Navigator.pop(context); // Close drawer
+                Navigator.pop(context);
               },
             ),
             const Divider(),
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text('Logout', style: TextStyle(color: Colors.red)),
               onTap: () {
-                Navigator.pop(context); // Close drawer
+                Navigator.pop(context);r
                 doLogout();
               },
             ),

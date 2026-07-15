@@ -35,8 +35,7 @@ Widget build(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                /// Poster
+    
                 Image.network(
                   "https://ubaya.cloud/flutter/160423007/komiku/${comic.posterUrl}",
                   width: double.infinity,
@@ -104,7 +103,6 @@ Widget build(BuildContext context) {
 
                       const SizedBox(height: 24),
 
-                      /// Read Comic Button
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(

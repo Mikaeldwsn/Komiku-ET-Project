@@ -51,16 +51,6 @@ class _LoginPageState extends State<LoginPage> {
         );
         main();
 
-        // if (mounted) {
-        //   Navigator.of(context).pushReplacement(
-        //     MaterialPageRoute(
-        //       builder: (context) => Scaffold(
-        //         appBar: AppBar(title: const Text('Komiku')),
-        //         body: Center(child: Text("Welcome, ${response['username']}!")),
-        //       ),
-        //     ),
-        //   );
-        // }
       } else {
         setState(() {
           _isLoading = false;

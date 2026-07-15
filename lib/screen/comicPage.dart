@@ -55,8 +55,7 @@ class _ComicPageState extends State<ComicPage> {
               comic.categories = detail.categories;
             });
           }
-        }).catchError((e) {
-          // ignore or handle error silently
+        }).catchError((e) {          
         });
       }
     }
@@ -160,7 +159,6 @@ class _ComicPageState extends State<ComicPage> {
 
                           const SizedBox(width: 16),
 
-                          // Informasi Komik
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

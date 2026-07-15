@@ -4,11 +4,10 @@ import 'screen/login.dart';
 import '/utils/session_helper.dart';
 import 'screen/home_page.dart';
 
-//variabel global username
+// global variable
 String activeUserId = "";
 String activeUsername = "";
 
-// checkUser dipanggil sblm app jalan, untuk cek apakah user sudah pernah login sebelumnya
 Future<String> checkUser() async {
   final prefs = await SharedPreferences.getInstance();
   String userId = prefs.getString("user_id") ?? '';
@@ -18,12 +17,10 @@ Future<String> checkUser() async {
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  checkUser().then((String result) { //PANGGIL METHOD checkUser()
+  checkUser().then((String result) {
     if (result == '') {
-      // IF blm pernah login THEN tampilkan halaman Login
       runApp(const MaterialAppWrapper(home: LoginPage()));
     } else {
-      // IF sdh pernah login THEN langsung masuk
       activeUserId = result;
       runApp(const MaterialAppWrapper(home: HomePage()));
     }
@@ -46,5 +43,5 @@ class MaterialAppWrapper extends StatelessWidget {
 
 void doLogout() async {
   await SessionHelper.logout();
-  main(); // panggil ulang main() supaya kembali ke LoginPage
+  main();
 }

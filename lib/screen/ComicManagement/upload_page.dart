@@ -14,11 +14,10 @@ class UploadPage extends StatefulWidget {
   State<UploadPage> createState() => _UploadPageState();
 }
 
-class _UploadPageState extends State<UploadPage> {
-  //halaman yang sudah berhasil diupload ditampilkan sbg preview
+class _UploadPageState extends State<UploadPage> {  
   final List<Uint8List> _uploadedPages = [];
 
-  int _pageCounter = 0; // dipakai sebagai page_number, mulai dari 1
+  int _pageCounter = 0;
   bool _isUploading = false;
 
   void _showPicker(BuildContext context) {
@@ -54,7 +53,6 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  // setiap gambar dipilih langsung dikirim, bukan ditumpuk dulu)
   Future<void> _pickAndUpload(ImageSource source) async {
     final picker = ImagePicker();
     final image = await picker.pickImage(
@@ -95,7 +93,7 @@ class _UploadPageState extends State<UploadPage> {
           _uploadedPages.add(bytes);
         });
       } else {
-        _pageCounter -= 1; // rollback nomor halaman kalau gagal
+        _pageCounter -= 1;
         _showMessage('Gagal upload halaman: ${json['message'] ?? ''}');
       }
     } else {

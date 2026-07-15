@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String baseUrl = "https://ubaya.cloud/flutter/160423007/komiku";
 
-//MODEL COMMENT
 class ComicComment {
   int id;
   int userId;
@@ -61,7 +60,6 @@ class _ReadComicPageState extends State<ReadComicPage> {
   int _selectedRating = 0;
   final TextEditingController _commentController = TextEditingController();
 
-  // JIKA tidak null THEN komentar yang dikirim akan jadi reply ke komentar ini
   ComicComment? _replyTarget;
 
   String? _userId;
@@ -100,7 +98,7 @@ class _ReadComicPageState extends State<ReadComicPage> {
     }
   }
 
-  Future<void> _incrementView() async { //utk nambah jumlah view
+  Future<void> _incrementView() async {
     await http.post(
       Uri.parse("$baseUrl/increment_view.php"),
       body: {'comic_id': widget.comicId.toString()},
@@ -180,7 +178,7 @@ class _ReadComicPageState extends State<ReadComicPage> {
         setState(() {
           _replyTarget = null;
         });
-        _loadComments(); // refresh daftar komentar
+        _loadComments(); 
       } else {
         _showMessage('Gagal mengirim komentar');
       }

@@ -129,7 +129,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getString("user_id") ?? '';
 
-    // 1. Buat komik (judul dulu)
     final createResponse = await http.post(
       Uri.parse("$baseUrl/create_comic.php"),
       body: {'title': _title, 'user_id': userId},
@@ -164,7 +163,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
       );
     }
 
-    // Chapter 1 dibuat secara otomatis
     final chapterResponse = await http.post(
       Uri.parse("$baseUrl/create_chapter.php"),
       body: {
@@ -187,7 +185,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
 
     if (!mounted) return;
 
-    // upload halaman-halaman komik
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -212,7 +209,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
         child: ListView(
           padding: const EdgeInsets.all(10),
           children: [
-            //Judul
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
@@ -232,7 +228,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
               ),
             ),
 
-            // Kategori checkbox
             const Padding(
               padding: EdgeInsets.all(10),
               child: Text('Kategori', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -260,7 +255,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
                     }).toList(),
                   ),
 
-            // Poster
             const Padding(
               padding: EdgeInsets.all(10),
               child: Text('Poster Komik', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -278,7 +272,6 @@ class _CreateComicPageState extends State<CreateComicPage> {
               ),
             ),
 
-            // Btn Submit 
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: ElevatedButton(
